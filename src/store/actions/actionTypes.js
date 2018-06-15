@@ -20,3 +20,5 @@ export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const SET_AUTH_REDIRECT_PATH = 'SET_AUTH_REDIRECT_PATH';
 // creating a new actionType for our saga to listen to.
 export const AUTH_INITIATE_LOGOUT = 'AUTH_INITIATE_LOGOUT';
+// creating a new actionType for the check time out generator fucntion'
+export const AUTH_CHECK_TIMEOUT = 'AUTH_CHECK_TIMEOUT';

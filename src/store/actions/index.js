@@ -14,5 +14,6 @@ export {
     setAuthRedirectPath,
     authCheckState,
     // added this export as a new action creator to replace the hardcoded actiontype in auth file i sagas folder
-    logoutSucceed
+    logoutSucceed,
+    checkAuthTimeout
 } from './auth';

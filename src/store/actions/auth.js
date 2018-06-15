@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import * as actionTypes from './actionTypes';
 
 export const authStart = () => {
@@ -45,13 +44,20 @@ export const logout = () => {
         type: actionTypes.AUTH_INITIATE_LOGOUT
     };
 };
+// this is asynch code.  we can dispatch this in a saga.
+// 1. create a new generator function in the auth file in sagas folder.
 
+// once we create a new generator function we don't need this code anymore.  we need to create a new actiontype that diapatches an action = > in the actionTypes file.
 export const checkAuthTimeout = (expirationTime) => {
-    return dispatch => {
-        setTimeout(() => {
-            dispatch(logout());
-        }, expirationTime * 1000);
-    };
+  return {
+    type: actionTypes.AUTH_CHECK_TIMEOUT,
+    expirationTime: expirationTime
+  }
+    // return dispatch => {
+    //     setTimeout(() => {
+    //         dispatch(logout());
+    //     }, expirationTime * 1000);
+    // };
 };
 
 export const auth = (email, password, isSignup) => {
