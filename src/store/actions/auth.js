@@ -47,7 +47,8 @@ export const logout = () => {
 // this is asynch code.  we can dispatch this in a saga.
 // 1. create a new generator function in the auth file in sagas folder.
 
-// once we create a new generator function we don't need this code anymore.  we need to create a new actiontype that diapatches an action = > in the actionTypes file.
+// once we create a new generator function we don't need this code anymore.  we need to create a new actiontype that diapatches an action = > in the actionTypes file. we then add it as an actiontype
+// => then go to the index js file and import it.
 export const checkAuthTimeout = (expirationTime) => {
   return {
     type: actionTypes.AUTH_CHECK_TIMEOUT,
