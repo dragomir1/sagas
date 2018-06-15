@@ -12,5 +12,7 @@ export {
     auth,
     logout,
     setAuthRedirectPath,
-    authCheckState
+    authCheckState,
+    // added this export as a new action creator to replace the hardcoded actiontype in auth file i sagas folder
+    logoutSucceed
 } from './auth';

@@ -11,6 +11,12 @@ import registerServiceWorker from './registerServiceWorker';
 import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import orderReducer from './store/reducers/order';
 import authReducer from './store/reducers/auth';
+// this import registers the sagas and makes the store aware that its there.  we also need to import the file.
+import createSagaMiddleware from 'redux-saga';
+// import the listener generator funciton.  you dont need to add 'index' becuase it will automatically look for the index.
+import { watchAuth } from './store/sagas';
+
+// IM THE INDEX FILE IS WHERE WE CREATE OUR STORE.
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
@@ -20,9 +26,15 @@ const rootReducer = combineReducers({
     auth: authReducer
 });
 
+// we are executing the saga Middleware function.
+const sagaMiddleware = createSagaMiddleware();
+
+// add the sagaMiddleware const to the store then...you run it..see below.
 const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(thunk)
+    applyMiddleware(thunk, sagaMiddleware)
 ));
+// once the it's been added to the store, run the saga.
+sagaMiddleware.run(watchAuth);
 
 const app = (
     <Provider store={store}>

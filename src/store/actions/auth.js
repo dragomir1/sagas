@@ -15,6 +15,12 @@ export const authSuccess = (token, userId) => {
         userId: userId
     };
 };
+// this is a new action creator. that we will import and replace this with the hard coded actiontype in the auth.js in sagas folder.
+export const logoutSucceed = () => {
+  return {
+    type: actionTypes.AUTH_LOGOUT
+  };
+};
 
 export const authFail = (error) => {
     return {
@@ -23,12 +29,20 @@ export const authFail = (error) => {
     };
 };
 
+// since we have the actions in the saga, we are going to comment it out and just have it dispatch an action, or to create an action.  nothing else. no more side effects. becuase we handle the side effects with redux saga.
+
+// this is what is happening. we are going to dispatch a new action.
+// we need to create a new actionType. - actionTypes.js
+// so whenever we dispatch logout, we inititiate the logout instead.
+// so now the goal is listen to the action createor AUTH_INITIATE_LOGOUT and execute our logoutSaga generator whenever we detect the AUTH_INITIATE_LOGOUT.
+
+// to listen for the AUTH_INITIATE_LOGOUT, we need to create a new file in the sagas folder.
 export const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expirationDate');
-    localStorage.removeItem('userId');
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('expirationDate');
+    // localStorage.removeItem('userId');
     return {
-        type: actionTypes.AUTH_LOGOUT
+        type: actionTypes.AUTH_INITIATE_LOGOUT
     };
 };
 
@@ -87,7 +101,7 @@ export const authCheckState = () => {
                 const userId = localStorage.getItem('userId');
                 dispatch(authSuccess(token, userId));
                 dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000 ));
-            }   
+            }
         }
     };
 };
